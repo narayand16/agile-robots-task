@@ -1,5 +1,6 @@
-<div>
-    <p>{{country.name}}</p>
+<div *ngIf="country">
+    <h3>Country details :</h3>
+    <p>{{country.name + ' ' + country.emoji }}</p>
     <p>{{country.code}}</p>
     <p>{{country.phone}}</p>
     <p>{{country.capital}}</p>

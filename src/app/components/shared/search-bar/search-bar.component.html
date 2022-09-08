@@ -1,0 +1,6 @@
+<mat-form-field>
+    <mat-label *ngIf="showLabel">
+        {{ label }}
+    </mat-label>
+    <input matInput type="text" [placeholder]="placeholder" (keyup)="onKeyUp($event)">
+</mat-form-field>
