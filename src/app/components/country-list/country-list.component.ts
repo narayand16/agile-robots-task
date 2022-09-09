@@ -46,7 +46,7 @@ export class CountryListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCountrySelect(countryCode: string): void {
-    this.router.navigate(['/country/' + countryCode]);
+    this.router.navigate([`/country/${countryCode}`]);
   }
 
   onSearchFilter(searchText: string): void {

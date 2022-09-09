@@ -1,4 +1,10 @@
-<div *ngIf="isLoading; else listTemplate">Loading ...</div>
+<div class="container">
+  <div *ngIf="isLoading; else listTemplate">Loading ...</div>
+  <mat-paginator
+    showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  ></mat-paginator>
+</div>
 
 <ng-template #listTemplate>
   <app-search-bar
@@ -41,7 +47,3 @@
     ></tr>
   </table>
 </ng-template>
-<mat-paginator
-  showFirstLastButtons
-  [pageSizeOptions]="[5, 10, 25, 100]"
-></mat-paginator>

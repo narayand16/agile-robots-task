@@ -1,11 +1,6 @@
-table {
-  width: 100%;
-  height: auto;
-  tbody {
-    tr {
-      &.mat-row:hover {
-        cursor: pointer; // TODO
-      }
-    }
+.container {
+  padding-top: 1rem;
+  tr.mat-row {
+    cursor: pointer;
   }
 }

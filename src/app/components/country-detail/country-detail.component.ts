@@ -13,6 +13,7 @@ import { CountryService } from 'src/app/services/country.service';
 export class CountryDetailComponent implements OnInit, OnDestroy {
   country!: Country;
   countryCode = '';
+  isLoading = true;
   invalidCountryErrorMsg = '';
   destroy$ = new Subject<void>();
 
@@ -27,9 +28,10 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     this.countryService
       .getCountryByCode(this.countryCode)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(({ data }) => {
+      .subscribe(({ data, loading }) => {
         if (data.country) this.country = data.country;
         else this.invalidCountryErrorMsg = 'No data found for this country';
+        this.isLoading = loading;
       });
   }
 
