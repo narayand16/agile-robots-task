@@ -14,12 +14,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
     CountryListComponent,
     CountryDetailComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,8 +34,10 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

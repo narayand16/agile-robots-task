@@ -1,7 +1,26 @@
-<div *ngIf="country">
-    <h3>Country details :</h3>
-    <p>{{country.name + ' ' + country.emoji }}</p>
-    <p>{{country.code}}</p>
-    <p>{{country.phone}}</p>
-    <p>{{country.capital}}</p>
-</div>
+<mat-card *ngIf="country; else invalidCountryTmpl">
+  <mat-card-title>{{ country.name + " " + country.emoji }}</mat-card-title>
+  <mat-card-subtitle>{{ country.native }}</mat-card-subtitle>
+  <mat-card-content>
+    <p>
+      <b>Country Code:</b><span> {{ country.code }}</span>
+    </p>
+    <p>
+      <b>Capital:</b
+      ><span> {{ country.capital ? country.capital : "NA" }}</span>
+    </p>
+    <p>
+      <b>Currency:</b
+      ><span> {{ country.currency ? country.currency : "NA" }}</span>
+    </p>
+    <p>
+      <b>Phone code:</b><span> {{ country.phone }}</span>
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<button mat-raised-button (click)="onBackBtnClick()">Back</button>
+
+<ng-template #invalidCountryTmpl>
+  {{ invalidCountryErrorMsg }}
+</ng-template>

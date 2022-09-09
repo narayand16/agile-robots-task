@@ -4,4 +4,6 @@ export interface Country {
     capital: string;
     phone: number;
     emoji: string;
+    native: string;
+    currency: string
 }

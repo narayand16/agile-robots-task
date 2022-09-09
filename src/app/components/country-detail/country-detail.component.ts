@@ -1,27 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
-import { Country } from 'src/app/models/country';
+import { Subject, takeUntil } from 'rxjs';
+import { Country } from 'src/app/models/country.interface';
 import { CountryService } from 'src/app/services/country.service';
 
 @Component({
   selector: 'app-country-detail',
   templateUrl: './country-detail.component.html',
-  styleUrls: ['./country-detail.component.scss']
+  styleUrls: ['./country-detail.component.scss'],
 })
-export class CountryDetailComponent implements OnInit {
+export class CountryDetailComponent implements OnInit, OnDestroy {
   country!: Country;
   countryCode = '';
+  invalidCountryErrorMsg = '';
+  destroy$ = new Subject<void>();
 
-  constructor(private activatedRoute: ActivatedRoute, private countryService: CountryService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private countryService: CountryService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.pipe(switchMap(params => {
-      this.countryCode = params.get('id')!;
-      return this.countryService.getCountryByCode(this.countryCode);
-    })).subscribe(({data}) => {
-      this.country = data
-    })
+    this.countryCode = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.countryService
+      .getCountryByCode(this.countryCode)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ data }) => {
+        if (data.country) this.country = data.country;
+        else this.invalidCountryErrorMsg = 'No data found for this country';
+      });
   }
 
+  onBackBtnClick(): void {
+    this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
