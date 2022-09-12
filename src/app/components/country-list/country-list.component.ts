@@ -34,7 +34,6 @@ export class CountryListComponent implements OnInit, OnDestroy, AfterViewInit {
       .getCountries()
       .valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe(({ data, loading }) => {
-        console.log(loading);
         this.dataSource.data = data.countries;
         this.isLoading = loading;
       });
